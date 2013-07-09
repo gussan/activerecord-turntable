@@ -9,11 +9,10 @@ module ActiveRecord::Turntable
     attr_writer :spec
 
     def initialize(cluster, options = {})
-      @cluster      =  cluster
-      @model_class  =  cluster.klass
-      @current_shard =  (cluster.master || cluster.shards.first[1])
-      @fixed_shard  = false
-      @mixer = ActiveRecord::Turntable::Mixer.new(self)
+      @cluster             = cluster
+      @model_class         = cluster.klass
+      @default_shard       = (cluster.master || cluster.shards.first[1])
+      @mixer               = ActiveRecord::Turntable::Mixer.new(self)
     end
 
     delegate :logger, :to => ActiveRecord::Base
@@ -114,7 +113,11 @@ module ActiveRecord::Turntable
     end
 
     def fixed_shard
-      @fixed_shard
+      thread_hash[:fixed_shard]
+    end
+
+    def fixed_shard=(shard)
+      thread_hash[:fixed_shard] = shard
     end
 
     def master
@@ -130,29 +133,29 @@ module ActiveRecord::Turntable
     end
 
     def current_shard
-      @current_shard
+      thread_hash[:current_shard] ||= @default_shard
     end
 
     def current_shard=(shard)
       logger.debug { "Chainging #{@model_class}'s shard to #{shard.name}"}
-      @current_shard = shard
+      thread_hash[:current_shard] = shard
     end
 
     def connection
-      @current_shard.connection
+      current_shard.connection
     end
 
     def connection_pool
-      @current_shard.connection_pool
+      current_shard.connection_pool
     end
 
     def with_shard(shard)
       old_shard, old_fixed = current_shard, fixed_shard
       self.current_shard = shard
-      @fixed_shard = shard
+      self.fixed_shard = shard
       yield
     ensure
-      @fixed_shard = old_fixed
+      self.fixed_shard = old_fixed
       self.current_shard = old_shard
     end
 
@@ -238,6 +241,12 @@ module ActiveRecord::Turntable
 
     def spec
       @spec ||= master.connection_pool.spec
+    end
+
+    private
+
+    def thread_hash
+      Thread.current[self.object_id.to_s] ||= {}
     end
   end
 end
