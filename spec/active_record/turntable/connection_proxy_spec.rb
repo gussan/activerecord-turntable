@@ -159,28 +159,77 @@ describe ActiveRecord::Turntable::ConnectionProxy do
     end
   end
 
-  context "When calling exists? with shard_key" do
-    subject { User.exists?(id: 1) }
-    it { should be_true }
+  context "When calling with_shard" do
+    before do
+      establish_connection_to("test")
+      truncate_shard
+      @user1 = User.new
+      @user1.id = 1
+      @user1.nickname = 'user1'
+      @user1.save!
+      @user2 = User.new
+      @user2.id = 30000
+    end
+
+    context "do; User.count; end" do
+      context "with user_shard_1" do
+        subject {
+          User.connection.with_shard(@user1.turntable_shard) do
+            User.count
+          end
+        }
+        it { should == 1 }
+      end
+
+      context "with user_shard_2" do
+        subject {
+          User.connection.with_shard(@user2.turntable_shard) do
+            User.count
+          end
+        }
+        it { should == 0 }
+      end
+    end
   end
 
-  context "When calling exists? with non-existed shard_key" do
-    subject { User.exists?(id: 3) }
-    it { should be_false }
-  end
 
-  context "When calling exists? with non shard_key" do
-    subject { User.exists?(nickname: 'user2') }
-    it { should be_true }
-  end
+  context do
+    before do
+      establish_connection_to("test")
+      truncate_shard
+      @user1 = User.new
+      @user1.id = 1
+      @user1.nickname = 'user1'
+      @user1.save!
+      @user2 = User.new
+      @user2.id = 30000
+      @user2.nickname = 'user2'
+      @user2.save!
+    end
 
-  context "When calling exists? with non-existed non shard_key" do
-    subject { User.exists?(nickname: 'user999') }
-    it { should be_false }
-  end
+    context "When calling exists? with shard_key" do
+      subject { User.exists?(id: 1) }
+      it { should be_true }
+    end
 
-  context "#table_exists?" do
-    subject { User.connection.table_exists?(:users) }
-    it { should be_true }
+    context "When calling exists? with non-existed shard_key" do
+      subject { User.exists?(id: 3) }
+      it { should be_false }
+    end
+
+    context "When calling exists? with non shard_key" do
+      subject { User.exists?(nickname: 'user2') }
+      it { should be_true }
+    end
+
+    context "When calling exists? with non-existed non shard_key" do
+      subject { User.exists?(nickname: 'user999') }
+      it { should be_false }
+    end
+
+    context "#table_exists?" do
+      subject { User.connection.table_exists?(:users) }
+      it { should be_true }
+    end
   end
 end
