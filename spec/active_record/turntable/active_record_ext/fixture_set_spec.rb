@@ -1,7 +1,7 @@
 require "spec_helper"
 
 require "active_record"
-require "active_record/turntable/active_record_ext/fixtures"
+require "active_record/turntable/active_record_ext/fixture_set"
 
 describe ActiveRecord::FixtureSet do
   before(:all) do

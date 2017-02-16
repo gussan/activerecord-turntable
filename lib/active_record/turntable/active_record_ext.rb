@@ -7,12 +7,14 @@ module ActiveRecord::Turntable
       autoload :AbstractAdapter
       autoload :CleverLoad
       autoload :ConnectionHandlerExtension
+      autoload :FixtureSet
       autoload :LogSubscriber
       autoload :Persistence
       autoload :SchemaDumper
       autoload :Sequencer
       autoload :Relation
       autoload :Transactions
+      autoload :TestFixtures
       autoload :AssociationPreloader
       autoload :Association
       autoload :LockingOptimistic
@@ -31,7 +33,8 @@ module ActiveRecord::Turntable
       ActiveRecord::ConnectionAdapters::ConnectionHandler.prepend(ConnectionHandlerExtension)
       ActiveRecord::Associations::Preloader::Association.prepend(AssociationPreloader)
       ActiveRecord::Associations::Association.prepend(Association)
-      require "active_record/turntable/active_record_ext/fixtures"
+      ActiveRecord::FixtureSet.prepend(FixtureSet)
+      ActiveRecord::TestFixtures.prepend(TestFixtures)
       require "active_record/turntable/active_record_ext/migration_proxy"
       require "active_record/turntable/active_record_ext/activerecord_import_ext"
       require "active_record/turntable/active_record_ext/acts_as_archive_extension"
