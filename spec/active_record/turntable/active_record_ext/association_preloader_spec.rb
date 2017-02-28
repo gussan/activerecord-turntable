@@ -37,7 +37,7 @@ describe ActiveRecord::Turntable::ActiveRecordExt::AssociationPreloader do
 
   context "When preloads has_many association" do
     before do
-      ActiveRecord::Base.turntable_config.instance_variable_get(:@config)[:raise_on_not_specified_shard_query] = true
+      ActiveRecord::Base.turntable_configuration.instance_variable_get(:@config)[:raise_on_not_specified_shard_query] = true
     end
 
     context "associated objects has same turntable_key" do

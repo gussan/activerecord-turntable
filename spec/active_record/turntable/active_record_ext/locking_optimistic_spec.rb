@@ -8,11 +8,11 @@ describe ActiveRecord::Turntable::ActiveRecordExt::LockingOptimistic do
   before do
     establish_connection_to(:test)
     truncate_shard
-    ActiveRecord::Base.turntable_config.instance_variable_get(:@config)[:raise_on_not_specified_shard_update] = true
+    ActiveRecord::Base.turntable_configuration.instance_variable_get(:@config)[:raise_on_not_specified_shard_update] = true
   end
 
   after do
-    ActiveRecord::Base.turntable_config.instance_variable_get(:@config)[:raise_on_not_specified_shard_update] = false
+    ActiveRecord::Base.turntable_configuration.instance_variable_get(:@config)[:raise_on_not_specified_shard_update] = false
   end
 
   let!(:user_status) do

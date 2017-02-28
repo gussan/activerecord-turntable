@@ -12,9 +12,9 @@ describe ActiveRecord::Turntable::Shard do
     end
 
     subject {
-      ActiveRecord::Turntable::Shard.new(ActiveRecord::Base.turntable_config[:clusters][:user_cluster][:shards][0])
+      ActiveRecord::Turntable::Shard.new(ActiveRecord::Base.turntable_configuration[:clusters][:user_cluster][:shards][0])
     }
-    its(:name) { should == ActiveRecord::Base.turntable_config[:clusters][:user_cluster][:shards][0][:connection] }
+    its(:name) { should == ActiveRecord::Base.turntable_configuration[:clusters][:user_cluster][:shards][0][:connection] }
     its(:connection) { should be_instance_of(ActiveRecord::ConnectionAdapters::Mysql2Adapter) }
     its(:connection_pool) { should be_instance_of(ActiveRecord::ConnectionAdapters::ConnectionPool) }
   end

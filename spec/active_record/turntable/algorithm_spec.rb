@@ -6,7 +6,7 @@ describe ActiveRecord::Turntable::Algorithm do
   end
 
   describe ActiveRecord::Turntable::Algorithm::RangeBsearchAlgorithm do
-    let(:algorithm) { ActiveRecord::Turntable::Algorithm::RangeBsearchAlgorithm.new(ActiveRecord::Base.turntable_config[:clusters][:user_cluster]) }
+    let(:algorithm) { ActiveRecord::Turntable::Algorithm::RangeBsearchAlgorithm.new(ActiveRecord::Base.turntable_configuration[:clusters][:user_cluster]) }
     context "#calculate" do
       it "called with 1 returns user_shard_1" do
         expect(algorithm.calculate(1)).to eq("user_shard_1")
@@ -45,7 +45,7 @@ describe ActiveRecord::Turntable::Algorithm do
   end
 
   describe ActiveRecord::Turntable::Algorithm::RangeAlgorithm do
-    let(:algorithm) { ActiveRecord::Turntable::Algorithm::RangeAlgorithm.new(ActiveRecord::Base.turntable_config[:clusters][:user_cluster]) }
+    let(:algorithm) { ActiveRecord::Turntable::Algorithm::RangeAlgorithm.new(ActiveRecord::Base.turntable_configuration[:clusters][:user_cluster]) }
     context "#calculate" do
       it "called with 1 returns user_shard_1" do
         expect(algorithm.calculate(1)).to eq("user_shard_1")
@@ -84,7 +84,7 @@ describe ActiveRecord::Turntable::Algorithm do
   end
 
   describe ActiveRecord::Turntable::Algorithm::ModuloAlgorithm do
-    let(:algorithm) { ActiveRecord::Turntable::Algorithm::ModuloAlgorithm.new(ActiveRecord::Base.turntable_config[:clusters][:mod_cluster]) }
+    let(:algorithm) { ActiveRecord::Turntable::Algorithm::ModuloAlgorithm.new(ActiveRecord::Base.turntable_configuration[:clusters][:mod_cluster]) }
     context "#calculate" do
       it "called with 1 return user_shard_2" do
         expect(algorithm.calculate(1)).to eq("user_shard_2")
