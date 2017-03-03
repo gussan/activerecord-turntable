@@ -23,6 +23,7 @@ module ActiveRecord::Turntable
     autoload :Cluster
     autoload :ClusterHelperMethods
     autoload :Config
+    autoload :Configuration
     autoload :ConfigurationMethods
     autoload :ConnectionProxy
     autoload :Deprecation

@@ -7,6 +7,8 @@ module ActiveRecord::Turntable
       "algorithm" => "range",
     }.with_indifferent_access
 
+    attr_accessor :algorithm
+
     def initialize(cluster_spec, options = {})
       @config = DEFAULT_CONFIG.merge(cluster_spec)
       @options = options.with_indifferent_access
@@ -26,8 +28,8 @@ module ActiveRecord::Turntable
       end
 
       # setup algorithm
-      alg_name = "ActiveRecord::Turntable::Algorithm::#{@config[:algorithm].camelize}Algorithm"
-      @algorithm = alg_name.constantize.new(@config)
+      klass = Algorithm.class_for(@config[:algorithm])
+      @algorithm = klass.new(@config)
     end
 
     def seq
