@@ -12,10 +12,13 @@ development:
       shards:
         - connection: user_shard_1
           less_than: 100
+          slave_connection: user_shard_1_slave
         - connection: user_shard_2
           less_than: 200
+          slave_connection: user_shard_2_slave
         - connection: user_shard_3
           less_than: 300
+          slave_connection: user_shard_3_slave
 
 test:
   clusters:
