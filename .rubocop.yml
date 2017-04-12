@@ -20,6 +20,9 @@ Style/ExtraSpacing:
   Exclude:
     - "activerecord-turntable.gemspec"
 
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
 Style/SpaceAroundOperators:
   Exclude:
     - "activerecord-turntable.gemspec"
