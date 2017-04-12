@@ -34,6 +34,7 @@ describe ActiveRecord::Turntable::Cluster do
 
     context "with argument out of shard range value" do
       let(:value) { out_of_range_shard_key_value }
+
       it { expect { subject }.to raise_error(ActiveRecord::Turntable::CannotSpecifyShardError) }
     end
   end

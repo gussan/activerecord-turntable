@@ -43,6 +43,7 @@ describe ActiveRecord::Turntable::ActiveRecordExt::Persistence do
         u.save
         u
       }
+
       its(:blob) { is_expected.to eq(user.reload.blob) }
     end
   end

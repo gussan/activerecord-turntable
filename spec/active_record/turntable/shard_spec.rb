@@ -17,6 +17,7 @@ describe ActiveRecord::Turntable::Shard do
     let(:shard) do
       ActiveRecord::Turntable::Shard.new(ActiveRecord::Base.turntable_config[:clusters][:user_cluster][:shards][0])
     end
+
     its(:turntable_shard_name) { is_expected.to eq(shard.name) }
   end
 end
