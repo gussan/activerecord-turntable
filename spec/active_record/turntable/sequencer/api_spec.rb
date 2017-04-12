@@ -18,6 +18,7 @@ describe ActiveRecord::Turntable::Sequencer::Api do
     end
 
     subject { sequencer.next_sequence_value(sequence_name) }
+
     it { is_expected.to be_kind_of(Integer) }
     it { is_expected.to eq api_response }
   end
@@ -28,6 +29,7 @@ describe ActiveRecord::Turntable::Sequencer::Api do
     end
 
     subject { sequencer.current_sequence_value(sequence_name) }
+
     it { is_expected.to be_kind_of(Integer) }
     it { is_expected.to eq api_response }
   end

@@ -20,6 +20,7 @@ describe ActiveRecord::TestFixtures do
     end
 
     subject { test_fixture.setup_fixtures }
+
     it { expect { subject }.not_to raise_error }
   end
 end

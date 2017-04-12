@@ -29,6 +29,7 @@ describe ActiveRecord::Turntable::ActiveRecordExt::Association do
   context "When a model with has_one relation" do
     context "When the has_one associated object doesn't exists" do
       subject { user.user_status }
+
       it { expect { subject }.not_to raise_error }
     end
   end
@@ -45,12 +46,14 @@ describe ActiveRecord::Turntable::ActiveRecordExt::Association do
     context "associated objects has same turntable_key" do
       context "AssociationRelation#to_a" do
         subject { cards_user.cards_users_histories.to_a }
+
         it { expect { subject }.not_to raise_error }
         it { is_expected.to include(*cards_users_histories.select { |history| history.cards_user_id == cards_user.id }) }
       end
 
       context "AssociationRelation#where" do
         subject { cards_user.cards_users_histories.where(id: cards_users_history.id).to_a }
+
         it { expect { subject }.not_to raise_error }
         it { is_expected.to include(cards_users_history) }
       end

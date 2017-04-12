@@ -3,6 +3,7 @@ require "spec_helper"
 describe ActiveRecord::Turntable::ConnectionProxy do
   context "When initialized" do
     subject { ActiveRecord::Turntable::ConnectionProxy.new(User, cluster) }
+
     let(:cluster) { ActiveRecord::Turntable::Cluster.new(ActiveRecord::Base.turntable_config[:clusters][:user_cluster]) }
     its(:master_connection) { is_expected.to eql(ActiveRecord::Base.connection) }
   end
@@ -109,6 +110,7 @@ describe ActiveRecord::Turntable::ConnectionProxy do
           User.count
         end
       }
+
       it { is_expected.to have(3).items }
 
       it "returns User.count of each shards" do
@@ -125,6 +127,7 @@ describe ActiveRecord::Turntable::ConnectionProxy do
             raise "Unko Error"
           end
         }
+
         it { expect { subject }.not_to raise_error }
         it { is_expected.to have(3).items }
         it "collection " do
@@ -149,6 +152,7 @@ describe ActiveRecord::Turntable::ConnectionProxy do
     end
 
     subject { User.exists?(id: 1) }
+
     it { is_expected.to be_truthy }
   end
 
@@ -165,6 +169,7 @@ describe ActiveRecord::Turntable::ConnectionProxy do
     end
 
     subject { User.exists?(id: 3) }
+
     it { is_expected.to be_falsey }
   end
 
@@ -181,6 +186,7 @@ describe ActiveRecord::Turntable::ConnectionProxy do
     end
 
     subject { User.exists?(nickname: "user2") }
+
     it { is_expected.to be_truthy }
   end
 
@@ -197,6 +203,7 @@ describe ActiveRecord::Turntable::ConnectionProxy do
     end
 
     subject { User.exists?(nickname: "user999") }
+
     it { is_expected.to be_falsey }
   end
 
@@ -213,6 +220,7 @@ describe ActiveRecord::Turntable::ConnectionProxy do
     end
 
     subject { User.connection.data_source_exists?(:users) }
+
     it { is_expected.to be_truthy }
   end
 end

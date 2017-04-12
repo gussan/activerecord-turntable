@@ -8,16 +8,19 @@ describe ActiveRecord::Turntable::Algorithm::RangeBsearchAlgorithm do
 
     context "#calculate with 1" do
       subject { @alg.calculate(1) }
+
       it { is_expected.to eq(ActiveRecord::Base.turntable_config[:clusters][:user_cluster][:shards][0][:connection]) }
     end
 
     context "#calculate with 19999" do
       subject { @alg.calculate(19999) }
+
       it { is_expected.to eq(ActiveRecord::Base.turntable_config[:clusters][:user_cluster][:shards][0][:connection]) }
     end
 
     context "#calculate with 20000" do
       subject { @alg.calculate(20000) }
+
       it { is_expected.to eq(ActiveRecord::Base.turntable_config[:clusters][:user_cluster][:shards][1][:connection]) }
     end
 

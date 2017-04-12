@@ -8,16 +8,19 @@ describe ActiveRecord::Turntable::Algorithm::ModuloAlgorithm do
 
     context "#calculate with 1" do
       subject { @alg.calculate(1) }
+
       it { is_expected.to eq(ActiveRecord::Base.turntable_config[:clusters][:user_cluster][:shards][1][:connection]) }
     end
 
     context "#calculate with 3" do
       subject { @alg.calculate(3) }
+
       it { is_expected.to eq(ActiveRecord::Base.turntable_config[:clusters][:user_cluster][:shards][3][:connection]) }
     end
 
     context "#calculate with 5" do
       subject { @alg.calculate(5) }
+
       it { is_expected.to eq(ActiveRecord::Base.turntable_config[:clusters][:user_cluster][:shards][0][:connection]) }
     end
 

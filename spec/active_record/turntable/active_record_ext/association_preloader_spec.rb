@@ -35,6 +35,7 @@ describe ActiveRecord::Turntable::ActiveRecordExt::AssociationPreloader do
 
     context "associated objects has same turntable_key" do
       subject { CardsUser.where(user: user).preload(:cards_users_histories).first }
+
       it { expect { subject }.not_to raise_error }
 
       it "its association should be loaded" do

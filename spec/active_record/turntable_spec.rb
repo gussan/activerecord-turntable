@@ -21,6 +21,7 @@ describe ActiveRecord::Turntable do
 
   context "#config" do
     subject { ActiveRecord::Base.turntable_config }
+
     it { is_expected.to be_instance_of(ActiveRecord::Turntable::Config) }
   end
 end

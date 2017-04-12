@@ -14,6 +14,7 @@ describe ActiveRecord::FixtureSet do
 
   describe ".create_fixtures" do
     subject { ActiveRecord::FixtureSet.create_fixtures(fixtures_root, "cards") }
+
     it { is_expected.to be_instance_of(Array) }
     it "creates card records" do
       expect { subject }.to change { Card.count }.from(0).to(cards.size)

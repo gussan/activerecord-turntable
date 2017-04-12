@@ -3,6 +3,7 @@ require "active_support/executor"
 
 describe ActiveRecord::Turntable::QueryCache do
   subject { mw.call({}) }
+
   let(:mw) {
     executor = Class.new(ActiveSupport::Executor)
     ActiveRecord::Turntable::QueryCache.install_executor_hooks executor

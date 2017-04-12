@@ -43,6 +43,7 @@ describe ActiveRecord::Turntable::ClusterHelperMethods do
 
     context "When checking `shard_fixed?` from given block" do
       subject { User.weighted_random_shard_with(&block) }
+
       let(:block) { -> { User.connection.shard_fixed? } }
 
       context "When users table has no record" do

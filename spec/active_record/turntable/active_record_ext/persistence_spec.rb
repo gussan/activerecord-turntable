@@ -35,6 +35,7 @@ describe ActiveRecord::Turntable::ActiveRecordExt::Persistence do
   context "When creating record" do
     context "with blob column" do
       subject { user }
+
       let(:blob_value) { "\123\123\123" }
       let(:user) {
         u = User.new(nickname: "x", blob: blob_value)
@@ -201,6 +202,7 @@ describe ActiveRecord::Turntable::ActiveRecordExt::Persistence do
 
   context "When call reload" do
     subject { cards_user.reload }
+
     it { is_expected.to be_instance_of(CardsUser) }
     it { is_expected.to eq(cards_user) }
   end
