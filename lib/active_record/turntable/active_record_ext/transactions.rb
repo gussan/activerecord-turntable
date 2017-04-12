@@ -24,7 +24,6 @@ module ActiveRecord::Turntable
         else
           super
         end
-
       ensure
         if @transaction_state && @transaction_state.committed?
           clear_transaction_record_state
