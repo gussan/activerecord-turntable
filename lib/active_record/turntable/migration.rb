@@ -107,7 +107,7 @@ module ActiveRecord::Turntable::Migration
         super
 
         ActiveRecord::Tasks::DatabaseTasks.each_current_turntable_cluster_connected(current_environment) do |name, configuration|
-          puts "[turntable] *** Migrating database: #{configuration['database']}(Shard: #{name})"
+          puts "[turntable] *** Migrating database: #{configuration["database"]}(Shard: #{name})"
           super(migrations_paths, target_version)
         end
       end
@@ -116,7 +116,7 @@ module ActiveRecord::Turntable::Migration
         super
 
         ActiveRecord::Tasks::DatabaseTasks.each_current_turntable_cluster_connected(current_environment) do |name, configuration|
-          puts "[turntable] *** Migrating database: #{configuration['database']}(Shard: #{name})"
+          puts "[turntable] *** Migrating database: #{configuration["database"]}(Shard: #{name})"
           super(migrations_paths, target_version, &block)
         end
       end
@@ -125,7 +125,7 @@ module ActiveRecord::Turntable::Migration
         super
 
         ActiveRecord::Tasks::DatabaseTasks.each_current_turntable_cluster_connected(current_environment) do |name, configuration|
-          puts "[turntable] *** Migrating database: #{configuration['database']}(Shard: #{name})"
+          puts "[turntable] *** Migrating database: #{configuration["database"]}(Shard: #{name})"
           super(*args)
         end
       end

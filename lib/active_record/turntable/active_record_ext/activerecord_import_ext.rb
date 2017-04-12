@@ -23,7 +23,7 @@ module ActiveRecord::Turntable
               connection_memo.quote(type_caster_memo.type_cast_for_database(column.name, val))
             end
           end
-          "(#{my_values.join(',')})"
+          "(#{my_values.join(",")})"
         end
       end
     end

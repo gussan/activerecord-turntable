@@ -38,7 +38,7 @@ module ActiveRecord::Turntable
       end
 
       def sequence_name(table_name, pk)
-        "#{table_name}_#{pk || 'id'}_seq"
+        "#{table_name}_#{pk || "id"}_seq"
       end
 
       def table_name(seq_name)

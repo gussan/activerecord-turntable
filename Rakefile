@@ -141,7 +141,7 @@ namespace :turntable do
         system(*%w|git submodule update --init|)
         system(*%w|git submodule foreach git fetch origin|)
         Dir.chdir("tmp/rails") do
-          system(*%W|git checkout #{ENV['ARVERSION']}|)
+          system(*%W|git checkout #{ENV["ARVERSION"]}|)
         end
         FileUtils.cp_r("tmp/rails/activerecord/test", ".")
         FileUtils.cp_r("tmp/rails/activerecord/Rakefile", "activerecord.rake")

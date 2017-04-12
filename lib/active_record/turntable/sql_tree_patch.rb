@@ -32,7 +32,7 @@ class SQLTree::Tokenizer
   def tokenize_quoted_string(&block) # :yields: SQLTree::Token::String
     string = ""
     until next_char.nil? || current_char == "'"
-      string << (current_char == "\\" ? instance_eval("%@\\#{next_char.gsub('@', '\@')}@") : current_char)
+      string << (current_char == "\\" ? instance_eval("%@\\#{next_char.gsub("@", '\@')}@") : current_char)
     end
     handle_token(SQLTree::Token::String.new(string), &block)
   end
@@ -205,7 +205,7 @@ module SQLTree::Node
 
     def to_sql(options = {})
       sql = "#{hint_method} #{hint_key} "
-      sql << "(#{index_list.map(&:to_sql).join(' ')})"
+      sql << "(#{index_list.map(&:to_sql).join(" ")})"
       sql
     end
 

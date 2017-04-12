@@ -5,21 +5,21 @@ module ActiveRecord
     module DatabaseTasks
       def create_all_turntable_cluster
         each_local_turntable_cluster_configuration { |_name, configuration|
-          puts "[turntable] *** executing to database: #{configuration['database']}"
+          puts "[turntable] *** executing to database: #{configuration["database"]}"
           create configuration
         }
       end
 
       def drop_all_turntable_cluster
         each_local_turntable_cluster_configuration { |_name, configuration|
-          puts "[turntable] *** executing to database: #{configuration['database']}"
+          puts "[turntable] *** executing to database: #{configuration["database"]}"
           drop configuration
         }
       end
 
       def create_current_turntable_cluster(environment = env)
         each_current_turntable_cluster_configuration(environment) { |_name, configuration|
-          puts "[turntable] *** executing to database: #{configuration['database']}"
+          puts "[turntable] *** executing to database: #{configuration["database"]}"
           create configuration
         }
         ActiveRecord::Base.establish_connection environment.to_sym
@@ -27,7 +27,7 @@ module ActiveRecord
 
       def drop_current_turntable_cluster(environment = env)
         each_current_turntable_cluster_configuration(environment) { |_name, configuration|
-          puts "[turntable] *** executing to database: #{configuration['database']}"
+          puts "[turntable] *** executing to database: #{configuration["database"]}"
           drop configuration
         }
       end
@@ -61,7 +61,7 @@ module ActiveRecord
             if local_database?(configuration)
               yield(name, configuration)
             else
-              $stderr.puts "This task only modifies local databases. #{configuration['database']} is on a remote host."
+              $stderr.puts "This task only modifies local databases. #{configuration["database"]} is on a remote host."
             end
           end
         end
