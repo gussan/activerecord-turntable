@@ -16,9 +16,17 @@ AllCops:
 RSpec/NestedGroups:
   Max: 4
 
+Style/DotPosition:
+  Exclude:
+    - "lib/active_record/turntable/active_record_ext/relation.rb"
+
 Style/ExtraSpacing:
   Exclude:
     - "activerecord-turntable.gemspec"
+
+Style/MultilineMethodCallIndentation:
+  Exclude:
+    - "lib/active_record/turntable/active_record_ext/relation.rb"
 
 Style/PercentLiteralDelimiters:
   Enabled: false
