@@ -132,9 +132,7 @@ describe ActiveRecord::Turntable::ConnectionProxy do
         it { expect { subject }.not_to raise_error }
         it { is_expected.to have(3).items }
         it "collection " do
-          subject.each do |s|
-            expect(s).to be_instance_of(RuntimeError)
-          end
+          expect(subject).to all(be_instance_of(RuntimeError))
         end
       end
     end
