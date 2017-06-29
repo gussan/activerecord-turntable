@@ -100,7 +100,7 @@ describe ActiveRecord::Turntable::ClusterHelperMethods do
           probabilities_matcher = shard_size.times.map do |idx|
             be_within(0.05).of(probabilities_in_each_shard[idx])
           end
-          expect(result).to match_array(probabilities_matcher)
+          expect(result).to match(probabilities_matcher)
         end
       end
     end
