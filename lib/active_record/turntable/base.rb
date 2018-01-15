@@ -91,25 +91,7 @@ module ActiveRecord::Turntable
         turntable_cluster.select_shard(current_sequence_value) if sequencer_enabled?
       end
 
-      def with_shard(any_shard)
-        shard = case any_shard
-                when Numeric
-                  turntable_cluster.shard_for(any_shard)
-                when ActiveRecord::Base
-                  turntable_cluster.shard_for(any_shard.send(any_shard.turntable_shard_key))
-                else
-                  shard_or_key
-                end
-        connection.with_shard(shard) { yield }
-      end
-
-      def with_slave
-        connection.with_slave { yield }
-      end
-
-      def with_master
-        connection.with_master { yield }
-      end
+      delegate :with_shard, :with_slave, :with_master, to: :connection
     end
 
     delegate :shards_transaction, :turntable_cluster, to: :class

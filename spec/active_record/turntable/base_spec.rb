@@ -22,4 +22,17 @@ describe ActiveRecord::Turntable::Base do
       its(:connection) { expect { subject }.not_to raise_error }
     end
   end
+
+  context ".with_shard" do
+    subject { klass.with_shard(shard, &block) }
+
+    let(:klass) { User }
+    let(:block) {
+      -> {}
+    }
+    let(:shard) { klass.turntable_cluster.shards.first }
+
+    context "call with Shard object"
+    it { expect { subject }.not_to raise_error }
+  end
 end
