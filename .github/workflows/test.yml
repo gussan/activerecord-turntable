@@ -9,8 +9,16 @@ jobs:
       matrix:
         ruby: [2.5, 2.6, 2.7, 3.0]
         gemfile: [rails6_1_0, rails_edge]
+    services:
+      mysql:
+        image: mysql:5.7
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: ''
     env:
       BUNDLE_GEMFILE: gemfiles/${{ matrix.gemfile }}.gemfile
+      MYSQL_HOST: mysql
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
