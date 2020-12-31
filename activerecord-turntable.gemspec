@@ -23,8 +23,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.required_ruby_version = ">= 2.2.2"
 
-  spec.add_runtime_dependency "activerecord",  ">= 5.0", "< 6.0"
-  spec.add_runtime_dependency "activesupport", ">= 5.0", "< 6.0"
+  spec.add_runtime_dependency "activerecord",  ">= 6.1"
+  spec.add_runtime_dependency "activesupport", ">= 6.1"
   spec.add_runtime_dependency "bsearch",       "~> 1.5"
   spec.add_runtime_dependency "sql_tree",      "= 0.2.0"
 
@@ -45,7 +45,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rack"
   spec.add_development_dependency "rails"
   spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec", "~> 3.5.0"
+  spec.add_development_dependency "rspec"
   spec.add_development_dependency "rspec-collection_matchers"
   spec.add_development_dependency "rspec-its"
   spec.add_development_dependency "rspec-parameterized"
@@ -57,8 +57,8 @@ Gem::Specification.new do |spec|
 
   # activerecord testing dependencies
   spec.add_development_dependency "actionview"
-  spec.add_development_dependency "bcrypt", "~> 3.1.11"
+  spec.add_development_dependency "bcrypt"
   spec.add_development_dependency "minitest"
   spec.add_development_dependency "mocha"
-  spec.add_development_dependency "sqlite3", "~> 1.3.6"
+  spec.add_development_dependency "sqlite3"
 end
